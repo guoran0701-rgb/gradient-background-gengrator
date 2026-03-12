@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect, useCallback } from 'react';
-import { hexToHsl, hslToHex, hslToRgb } from '@/lib/colorUtils';
+import { hexToHsl, hslToHex } from '@/lib/colorUtils';
 
 interface ColorWheelProps {
   color1: string;
@@ -11,7 +11,7 @@ interface ColorWheelProps {
   size?: number;
 }
 
-export function ColorWheel({ color1, color2, onColor1Change, onColor2Change, size = 280 }: ColorWheelProps) {
+export function ColorWheel({ color1, color2, onColor1Change, onColor2Change, size = 320 }: ColorWheelProps) {
   const [isDragging1, setIsDragging1] = useState(false);
   const [isDragging2, setIsDragging2] = useState(false);
   const canvasRef = useRef<HTMLDivElement>(null);
@@ -180,23 +180,6 @@ export function ColorWheel({ color1, color2, onColor1Change, onColor2Change, siz
           onTouchStart={(e) => handleTouchStart(e, 2)}
         >
           <span className="absolute -top-5 left-1/2 -translate-x-1/2 text-xs font-bold text-gray-700 bg-white/80 px-1 rounded">2</span>
-        </div>
-      </div>
-      
-      <div className="flex gap-4">
-        <div className="flex items-center gap-2">
-          <div 
-            className="w-8 h-8 rounded-lg border-2 border-border"
-            style={{ backgroundColor: color1 }}
-          />
-          <span className="font-mono text-sm">{color1.toUpperCase()}</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <div 
-            className="w-8 h-8 rounded-lg border-2 border-border"
-            style={{ backgroundColor: color2 }}
-          />
-          <span className="font-mono text-sm">{color2.toUpperCase()}</span>
         </div>
       </div>
     </div>

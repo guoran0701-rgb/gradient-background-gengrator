@@ -30,16 +30,21 @@ export function ColorSelector({ colors, setColors }: ColorSelectorProps) {
   };
 
   const handleApplyColors = (color1: string, color2: string) => {
-    const newColors = [color1, color2, ...colors.slice(2)];
-    setColors(newColors);
+    // Always maintain two colors for the gradient for the color wheel
+    setColors([color1, color2]);
   };
 
   const handleApplyRecommendation = (rec: ColorRecommendation) => {
     setSelectedRecommendationType(rec.type);
+    // For recommendations, we take the primary selected color and the first recommended color
+    // If there are more colors in the recommendation, we use them too.
     const newColors = [selectedColor1, ...rec.colors];
     setColors(newColors);
     if (rec.colors.length > 0) {
       setSelectedColor2(rec.colors[0]);
+    } else {
+      // Fallback if recommendation doesn't provide additional colors
+      setSelectedColor2(selectedColor1);
     }
   };
 
@@ -106,7 +111,7 @@ export function ColorSelector({ colors, setColors }: ColorSelectorProps) {
             setSelectedColor2(color);
             handleApplyColors(selectedColor1, color);
           }}
-          size={260}
+          size={320} // Use the larger size here
         />
       </div>
 
